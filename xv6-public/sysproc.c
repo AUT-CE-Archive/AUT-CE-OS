@@ -89,3 +89,10 @@ sys_uptime(void)
   release(&tickslock);
   return xticks;
 }
+
+// HelloWorld system process
+int
+sys_HelloWorld(void)
+{
+  return HelloWorld();
+}

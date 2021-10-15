@@ -532,3 +532,11 @@ procdump(void)
     cprintf("\n");
   }
 }
+
+// HelloWorld process
+int
+HelloWorld(void)
+{
+  cprintf("Hello World!\n");
+  return 0;
+}
