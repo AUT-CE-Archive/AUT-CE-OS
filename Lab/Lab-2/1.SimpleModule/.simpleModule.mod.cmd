@@ -1,0 +1,1 @@
+cmd_/home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/simpleModule.mod := { echo  /home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/simpleModule.o;  echo; } > /home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/simpleModule.mod
