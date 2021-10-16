@@ -22,6 +22,9 @@ make qemu
 ```
 Finally do `code .` to view the code in VS Code.
 
+### Adding System Calls
+Quick guide on how to add system calls [here](https://stackoverflow.com/questions/8021774/how-do-i-add-a-system-call-utility-in-xv6?rq=1).
+
 ### Acknowledgments
 
 Copyright 2006-2018 Frans Kaashoek, Robert Morris, and Russ Cox.
