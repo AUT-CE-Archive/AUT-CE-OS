@@ -549,7 +549,7 @@ getProcCount(void)
   struct proc *p;
   int EMBRYO_count = 0, SLEEPING_count = 0, RUNNABLE_count = 0, ZOMBIE_count = 0, total = 0;
 
-  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
 
     // Embryo
     if (p->state == EMBRYO)
@@ -577,5 +577,20 @@ getProcCount(void)
   cprintf("- Runnable Processes:  %d\n", RUNNABLE_count);
   cprintf("- Zombie Processes:    %d\n", ZOMBIE_count);  
   cprintf("- Total:               %d\n", total);
+  return 0;
+}
+
+// Get the number of Read system-calls since system boot
+int
+getReadCount(void)
+{
+  
+  struct proc *p;
+  int total = 0;
+
+  for (p = ptable.proc; p < &ptable.proc[NPROC]; p++)
+    total += p->read_count;
+
+  cprintf("- Total number of Read system-calls: %d\n", total);
   return 0;
 }

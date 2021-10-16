@@ -105,6 +105,7 @@ extern int sys_write(void);
 extern int sys_uptime(void);
 extern int sys_HelloWorld(void);
 extern int sys_getProcCount(void);
+extern int sys_getReadCount(void);
 
 static int (*syscalls[])(void) = {
 [SYS_fork]    sys_fork,
@@ -130,6 +131,7 @@ static int (*syscalls[])(void) = {
 [SYS_close]   sys_close,
 [SYS_HelloWorld] sys_HelloWorld,
 [SYS_getProcCount] sys_getProcCount,
+[SYS_getReadCount] sys_getReadCount,
 };
 
 void
@@ -139,6 +141,11 @@ syscall(void)
   struct proc *curproc = myproc();
 
   num = curproc->tf->eax;
+
+  // (Thirdy-party) Increment read_count for each Read system-call
+  if (num == SYS_read)
+    curproc->read_count = curproc->read_count + 1;
+
   if(num > 0 && num < NELEM(syscalls) && syscalls[num]) {
     curproc->tf->eax = syscalls[num]();
   } else {

@@ -103,3 +103,10 @@ sys_getProcCount(void)
 {
   return getProcCount();
 }
+
+// Calls the function which retuns the number of Read system-calls since boot
+int
+sys_getReadCount(void)
+{
+  return getReadCount();
+}
