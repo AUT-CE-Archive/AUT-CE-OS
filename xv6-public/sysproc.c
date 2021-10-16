@@ -96,3 +96,10 @@ sys_HelloWorld(void)
 {
   return HelloWorld();
 }
+
+// Calls the function which returns the number of active/used processes
+int
+sys_getProcCount(void)
+{
+  return getProcCount();
+}

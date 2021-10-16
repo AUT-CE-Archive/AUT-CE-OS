@@ -540,3 +540,42 @@ HelloWorld(void)
   cprintf("Hello World!\n");
   return 0;
 }
+
+// Get number of active/used processes
+int
+getProcCount(void)
+{
+  
+  struct proc *p;
+  int EMBRYO_count = 0, SLEEPING_count = 0, RUNNABLE_count = 0, ZOMBIE_count = 0, total = 0;
+
+  for(p = ptable.proc; p < &ptable.proc[NPROC]; p++) {
+
+    // Embryo
+    if (p->state == EMBRYO)
+      EMBRYO_count++;
+    
+    // Sleeping
+    if (p->state == SLEEPING)
+      SLEEPING_count++;
+
+    // Runnable
+    if (p->state == RUNNABLE)
+      RUNNABLE_count++;
+
+    // Zombie
+    if (p->state == ZOMBIE)
+      ZOMBIE_count++;
+
+    // toal
+    if (p->state != UNUSED)
+      total++;
+  }
+
+  cprintf("- Embryo Processes:    %d\n", EMBRYO_count);
+  cprintf("- Sleeping Processes:  %d\n", SLEEPING_count);
+  cprintf("- Runnable Processes:  %d\n", RUNNABLE_count);
+  cprintf("- Zombie Processes:    %d\n", ZOMBIE_count);  
+  cprintf("- Total:               %d\n", total);
+  return 0;
+}
