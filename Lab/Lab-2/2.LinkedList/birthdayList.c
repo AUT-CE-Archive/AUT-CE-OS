@@ -59,11 +59,13 @@ int simple_init(void) {
 }
 
 void simple_exit(void) {
-
-	// Remofe items from list and free their allocated memory
+	
+	// Let's not make C90 sad with mixed declarations (:
 	struct birthday *ptr;	
 
+	// Remofe items from list and free their allocated memory
     list_for_each_entry(ptr, &birthday_list, list) {
+		list_del(&ptr->list);
     	kfree(ptr);
     }
 
