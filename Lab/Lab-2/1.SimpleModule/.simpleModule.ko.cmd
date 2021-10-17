@@ -1,1 +1,0 @@
-cmd_/home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/simpleModule.ko := ld -r -m elf_x86_64  --build-id=sha1  -T scripts/module.lds -o /home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/simpleModule.ko /home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/simpleModule.o /home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/simpleModule.mod.o;  true

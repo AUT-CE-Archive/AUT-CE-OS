@@ -1,1 +1,0 @@
-cmd_/home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/modules.order := {   echo /home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/simpleModule.ko; :; } | awk '!x[$$0]++' - > /home/keivanipchihagh/Desktop/Lab-2/1.SimpleModule/modules.order
