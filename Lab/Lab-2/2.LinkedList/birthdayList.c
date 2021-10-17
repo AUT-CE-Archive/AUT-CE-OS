@@ -59,6 +59,7 @@ int simple_init(void) {
 }
 
 void simple_exit(void) {
+<<<<<<< HEAD
 
 	printk(KERN_INFO "Removing Module from kernel..\n");
 
@@ -68,6 +69,17 @@ void simple_exit(void) {
 		list_del(&ptr->list);
 		kfree(ptr);
 	}
+=======
+	
+	// Let's not make C90 sad with mixed declarations (:
+	struct birthday *ptr;	
+
+	// Remofe items from list and free their allocated memory
+    list_for_each_entry(ptr, &birthday_list, list) {
+		list_del(&ptr->list);
+    	kfree(ptr);
+    }
+>>>>>>> 89ed8fd8f25a9864b19ecfd324e3c80be081a1ce
 
     printk(KERN_INFO "Memory is free and Module is removed.\n");
 }
