@@ -60,12 +60,14 @@ int simple_init(void) {
 
 void simple_exit(void) {
 
-	// Remofe items from list and free their allocated memory
-	struct birthday *ptr;	
+	printk(KERN_INFO "Removing Module from kernel..\n");
 
-    list_for_each_entry(ptr, &birthday_list, list) {
-    	kfree(ptr);
-    }
+	// Remofe items from list and free their allocated memory
+	struct birthday *ptr, *temp;
+	list_for_each_entry_safe(ptr, temp, &birthday_list, list) {
+		list_del(&ptr->list);
+		kfree(ptr);
+	}
 
     printk(KERN_INFO "Memory is free and Module is removed.\n");
 }
