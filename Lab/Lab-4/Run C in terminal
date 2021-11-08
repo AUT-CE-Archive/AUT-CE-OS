@@ -1,0 +1,6 @@
+Example:
+compile: "gcc -o server server.c"
+run: "./server"
+
+compile program with thread:
+compile: "gcc -pthread -o server server.c"
