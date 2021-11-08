@@ -7,6 +7,7 @@
 #include <unistd.h>
 
 #define PORT 8080
+#define BUFFER_SIZE 2014
 
 void *listener(void *_sock);
 
@@ -14,7 +15,7 @@ int main(int argc, char const *argv[])
 {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char buffer[1024] = {0};
+    char buffer[BUFFER_SIZE] = {0};    
 
     // create socket
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -46,11 +47,11 @@ int main(int argc, char const *argv[])
 
     // create a thread to listen to server
     pthread_t tid;
-    if (pthread_create(&tid, NULL, listener, "Hi") != 0) {
+    if (pthread_create(&tid, NULL, listener, (void *)sock) != 0) {
         printf("\nUnable to create thread.\n");
         exit(-1);
     } else
-        printf("[Thread created] Listening to server response..\n");
+        printf("Awaiting your request..\n");
 
     // forever sending
     while (1)
@@ -87,18 +88,17 @@ int main(int argc, char const *argv[])
 
 // [Thread handler] listens to transmissions
 void *listener(void *_sock)
-{
-    int sock = (int)(long)_sock;
+{   
+    int sock = (int)(long)_sock, valread;
     char buffer[1000];
     bzero(buffer, strlen(buffer));
 
     // listen to server forever
     while (1) {
-        int valread = read(sock, buffer, strlen(buffer));
-
-        if (valread > 0) {
-            bzero(buffer, strlen(buffer));
-            printf("[SERVER] %s\n", buffer);
+        if ((valread = read(sock, buffer, BUFFER_SIZE)) < 0) {
+            perror("read");
+            break;
         }
+        printf("%s\n", buffer);
     }
 }
