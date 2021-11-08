@@ -1,0 +1,1 @@
+cmd_/home/keivanipchihagh/Desktop/AUT-CE-OS/Lab/Lab-2/2.LinkedList/modules.order := {   echo /home/keivanipchihagh/Desktop/AUT-CE-OS/Lab/Lab-2/2.LinkedList/birthdayList.ko; :; } | awk '!x[$$0]++' - > /home/keivanipchihagh/Desktop/AUT-CE-OS/Lab/Lab-2/2.LinkedList/modules.order
