@@ -15,7 +15,6 @@ int main(int argc, char const *argv[])
 {
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char buffer[BUFFER_SIZE] = {0};    
 
     // create socket
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
@@ -56,33 +55,20 @@ int main(int argc, char const *argv[])
     // forever sending
     while (1)
     {
-        int group_id;
-        char command[30], message[100];    
-
-        scanf("%s", command);
+        char transmission[BUFFER_SIZE];
+        fgets(transmission, BUFFER_SIZE, stdin);
 
         // quit
-        if (strcmp(command, "quit") == 0) {
-            printf("Exiting..\n");
+        if (strcmp(transmission, "quit\n") == 0)
             break;
-        } else {
-            scanf("%d", &group_id);
-
-            // leave
-            if (strcmp(command, "leave") == 0) {
-                shutdown(sock, SHUT_RDWR);
-                close(sock);                
-                printf("Left the server..\n");
-            // send
-            } else if (strcmp(command, "send") == 0) {
-                scanf("%s", message);
-                send(sock, message, strlen(message), 0);
-                printf("Message sent as \"%s\"\n", message);
-            }
-        }
+        else
+            send(sock, transmission, strlen(transmission), 0);
     }
 
-    pthread_cancel(tid); // remove thread
+    pthread_cancel(tid);        // remove thread
+    shutdown(sock, SHUT_RDWR);  // shutdown socket
+    close(sock);                // close socket
+    printf("[CLIENT] Connection terminated, Socket closed.\n");
     return 0;
 }
 
@@ -90,15 +76,11 @@ int main(int argc, char const *argv[])
 void *listener(void *_sock)
 {   
     int sock = (int)(long)_sock, valread;
-    char buffer[1000];
-    bzero(buffer, strlen(buffer));
+    char buffer[BUFFER_SIZE] = {0};
 
-    // listen to server forever
-    while (1) {
-        if ((valread = read(sock, buffer, BUFFER_SIZE)) < 0) {
-            perror("read");
-            break;
-        }
+    // listen to server forever while there is a transmission
+    while ((valread = read(sock, buffer, BUFFER_SIZE)) > 0) {
         printf("%s\n", buffer);
+        bzero(buffer, strlen(buffer));
     }
 }
