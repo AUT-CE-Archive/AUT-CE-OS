@@ -127,6 +127,8 @@ int             unit0_operation(int);
 int             unit1_operation(int);
 int             unit2_operation(int);
 int             unit3_operation(int);
+int             clone(void*);
+int             join(void);
 
 // swtch.S
 void            swtch(struct context**, struct context*);

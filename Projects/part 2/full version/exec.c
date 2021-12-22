@@ -91,7 +91,7 @@ exec(char *path, char **argv)
   for(last=s=path; *s; s++)
     if(*s == '/')
       last = s+1;
-  safestrcpy(curproc->name, last, sizeof(curproc->name));
+  safestrcpy(curproc->name, last, sizeof(curproc->name));  
 
   // Commit to the user image.
   oldpgdir = curproc->pgdir;
@@ -99,6 +99,7 @@ exec(char *path, char **argv)
   curproc->sz = sz;
   curproc->tf->eip = elf.entry;  // main
   curproc->tf->esp = sp;
+  curproc->stackTop = curproc->tf->esp;
   switchuvm(curproc);
   freevm(oldpgdir);
   return 0;

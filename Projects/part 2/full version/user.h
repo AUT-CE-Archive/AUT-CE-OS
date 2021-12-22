@@ -30,6 +30,8 @@ int unit0_operation(int);
 int unit1_operation(int);
 int unit2_operation(int);
 int unit3_operation(int);
+int clone(void*);
+int join(void);
 
 // ulib.c
 int stat(const char*, struct stat*);
@@ -44,3 +46,4 @@ void* memset(void*, int, uint);
 void* malloc(uint);
 void free(void*);
 int atoi(const char*);
+int thread_creator(void (*fn) (void*), void *arg);

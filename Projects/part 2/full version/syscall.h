@@ -27,3 +27,5 @@
 #define SYS_unit1_operation 26
 #define SYS_unit2_operation 27
 #define SYS_unit3_operation 28
+#define SYS_clone 29
+#define SYS_join 30

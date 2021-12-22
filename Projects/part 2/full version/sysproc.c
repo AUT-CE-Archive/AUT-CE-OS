@@ -161,3 +161,18 @@ sys_unit3_operation(void)
     return -1;
   return unit3_operation(value);
 }
+
+int sys_clone(void)
+{ 
+   int stack;
+
+  // Stores the 0th int parameter into stack.
+  if(argint(0, &stack) < 0)
+    return -1;
+  return clone(&stack);
+}
+
+int sys_join(void)
+{
+  return join();
+}

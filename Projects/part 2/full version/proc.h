@@ -42,6 +42,8 @@ struct proc {
   enum procstate state;        // Process state
   int pid;                     // Process ID
   int read_count;              // (Third-party) Number of Read system-calls
+  int threads;                 // (Third-party) Threads
+  uint stackTop;               // (Third-party) Shows top of stack
   struct proc *parent;         // Parent process
   struct trapframe *tf;        // Trap frame for current syscall
   struct context *context;     // swtch() here to run process
