@@ -257,7 +257,7 @@ fork(void)
   np->sz = curproc->sz;
 
   // Child and parent have the same stack upon fork
-  np->stackTop = curproc->stackTop;
+  // np->stackTop = curproc->stackTop;
 
   // Only one thread exists
   np->threads = 1;
